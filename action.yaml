@@ -44,13 +44,13 @@ runs:
     - name: Build image
       shell: bash
       run: |
-        docker build --label release=${{ inputs.tag_name }} -f ${{ inputs.dockerfile }} --target ${{ input.target }} -t artifactory.internal.sysdig.com/${{ inputs.exporter }}:latest .
+        docker build --label release=${{ inputs.tag_name }} -f ${{ inputs.dockerfile }} --target ${{ inputs.target }} -t artifactory.internal.sysdig.com/${{ inputs.exporter }}:latest .
     - name: Publish docker image
       if: ${{ inputs.target }} == 'ubi'
       shell: bash
       run: |
-        docker tag artifactory.internal.sysdig.com/${{ inputs.exporter }}:latest artifactory.internal.sysdig.com/${{ inputs.exporter }}:${{ inputs.tag_name }}-${{ input.target }}
-        docker push artifactory.internal.sysdig.com/${{ inputs.exporter }}:${{ inputs.tag_name }}-${{ input.target }}
+        docker tag artifactory.internal.sysdig.com/${{ inputs.exporter }}:latest artifactory.internal.sysdig.com/${{ inputs.exporter }}:${{ inputs.tag_name }}-${{ inputs.target }}
+        docker push artifactory.internal.sysdig.com/${{ inputs.exporter }}:${{ inputs.tag_name }}-${{ inputs.target }}
     - name: Publish docker image
       if: ${{ inputs.target }} != 'ubi'
       shell: bash
